@@ -1,0 +1,130 @@
+<section class="hero">
+  <div class="container hero-content">
+    <p class="hero-super">CRECI-RJ 086.305 · Real Estate Agent</p>
+    <h1>More than finding a property,<br>I help you find a home.</h1>
+    <p class="hero-sub">Personalized, human-centered service in Rio de Janeiro.</p>
+
+    <form class="search-bar" (ngSubmit)="onSearch()">
+      <select [(ngModel)]="searchFinalidade" name="finalidade">
+        <option value="compra">Buy</option>
+        <option value="aluguel">Rent</option>
+      </select>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        name="q"
+        placeholder="Where do you want to live?"
+      />
+      <button type="submit" class="btn-primary search-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        Search
+      </button>
+    </form>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="container">
+    <h2 class="section-title">Featured properties</h2>
+
+    @if (loadingFeatured()) {
+      <div class="properties-grid">
+        <app-skeleton-card />
+        <app-skeleton-card />
+        <app-skeleton-card />
+      </div>
+    } @else if (featuredProperties().length > 0) {
+      <div class="properties-grid">
+        @for (imovel of featuredProperties(); track imovel.id) {
+          <app-property-card [imovel]="imovel" />
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="container about-grid">
+    <div class="about-avatar">
+      <div class="avatar-circle">LM</div>
+    </div>
+    <div class="about-text">
+      <h2>Hi, I'm Luciana.</h2>
+      <p>
+        With over 10 years of experience in the Rio de Janeiro real estate market,
+        I specialize in connecting people with spaces that truly feel like home.
+        I work with each client one-on-one — no rush, no pressure.
+      </p>
+      <div class="about-tags">
+        <span class="tag">10+ years of experience</span>
+        <span class="tag">Active CRECI</span>
+        <span class="tag">200+ deals closed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="differentials-section">
+  <div class="container">
+    <h2 class="section-title">Why work with me</h2>
+    <div class="differentials-grid">
+      <div class="differential-item">
+        <div class="diff-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </div>
+        <h3>Human-first service</h3>
+        <p>Every client gets my full attention. I take time to understand what matters to you before showing a single property.</p>
+      </div>
+      <div class="differential-item">
+        <div class="diff-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3>Safe process</h3>
+        <p>I guide you through every step of the legal and financial process, so there are no surprises after you sign.</p>
+      </div>
+      <div class="differential-item">
+        <div class="diff-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h3>Local expertise</h3>
+        <p>Born and raised in Rio, I know the neighborhoods, prices, and trends that outside agents often miss.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title">What my clients say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Luciana was incredible throughout the entire process. She found the perfect apartment for our family in less than a month. Attentive and zero pressure."</blockquote>
+        <cite>Fernanda Oliveira</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"An outstanding professional. She guided me through every step of the paperwork. I bought my apartment with total peace of mind."</blockquote>
+        <cite>Ricardo Matos</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"First-time buyer here. Luciana had endless patience with my questions and was always honest about every property she showed me."</blockquote>
+        <cite>Ana Paula Souza</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"We rented our home through Luciana. Fast, transparent, no unnecessary bureaucracy. We'll absolutely work with her again."</blockquote>
+        <cite>Carlos Eduardo Lima</cite>
+      </div>
+    </div>
+  </div>
+</section>

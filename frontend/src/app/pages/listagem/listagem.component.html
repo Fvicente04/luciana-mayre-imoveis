@@ -1,0 +1,156 @@
+<div class="listagem-layout">
+  <aside class="filters-sidebar">
+    <h2 class="filters-title">Filter properties</h2>
+
+    <div class="filter-group">
+      <label class="filter-label">Type</label>
+      <div class="chip-group">
+        @for (option of tipoOptions; track option.value) {
+          <button
+            type="button"
+            class="chip"
+            [class.chip-active]="filters.tipo === option.value"
+            (click)="filters.tipo = option.value"
+          >{{ option.label }}</button>
+        }
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label" for="finalidade">Purpose</label>
+      <select id="finalidade" [(ngModel)]="filters.finalidade" class="filter-select">
+        <option value="">Buy or Rent</option>
+        <option value="venda">Buy</option>
+        <option value="aluguel">Rent</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">
+        Max price: <strong>{{ formatPrice(precoMaxValue) }}</strong>
+      </label>
+      <input
+        type="range"
+        [(ngModel)]="precoMaxValue"
+        [min]="100000"
+        [max]="precoMaxSlider"
+        [step]="50000"
+        class="price-slider"
+      />
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Bedrooms</label>
+      <div class="chip-group">
+        @for (opt of [{v: undefined, l: 'Any'}, {v: 1, l: '1'}, {v: 2, l: '2+'}, {v: 3, l: '3+'}, {v: 4, l: '4+'}]; track opt.l) {
+          <button
+            type="button"
+            class="chip"
+            [class.chip-active]="filters.quartos === opt.v"
+            (click)="filters.quartos = opt.v"
+          >{{ opt.l }}</button>
+        }
+      </div>
+    </div>
+
+    @if (availableBairros().length > 0) {
+      <div class="filter-group">
+        <label class="filter-label" for="bairro">Neighborhood</label>
+        <select id="bairro" [(ngModel)]="filters.bairro" class="filter-select">
+          <option value="">All neighborhoods</option>
+          @for (bairro of availableBairros(); track bairro) {
+            <option [value]="bairro">{{ bairro }}</option>
+          }
+        </select>
+      </div>
+    }
+
+    <button type="button" class="btn-primary btn-apply" (click)="applyFilters()">
+      Search properties
+    </button>
+  </aside>
+
+  <main class="results-area">
+    <div class="results-header">
+      <p class="results-count">
+        @if (!loading()) {
+          <strong>{{ totalProperties() }}</strong> {{ totalProperties() === 1 ? 'property' : 'properties' }} found
+        }
+      </p>
+
+      <button class="btn-outline mobile-filter-btn" (click)="mobileFiltersOpen.set(true)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
+        </svg>
+        Filters
+      </button>
+    </div>
+
+    @if (loading()) {
+      <div class="properties-grid">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <app-skeleton-card />
+        }
+      </div>
+    } @else if (properties().length === 0) {
+      <div class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <h3>No properties found</h3>
+        <p>Try adjusting the filters to see more results.</p>
+      </div>
+    } @else {
+      <div class="properties-grid">
+        @for (imovel of properties(); track imovel.id) {
+          <app-property-card [imovel]="imovel" />
+        }
+      </div>
+
+      @if (totalPages() > 1) {
+        <div class="pagination">
+          <button
+            class="btn-outline"
+            [disabled]="filters.page === 1"
+            (click)="goToPage((filters.page ?? 1) - 1)"
+          >← Previous</button>
+
+          <span class="page-label">{{ currentPageLabel() }}</span>
+
+          <button
+            class="btn-outline"
+            [disabled]="filters.page === totalPages()"
+            (click)="goToPage((filters.page ?? 1) + 1)"
+          >Next →</button>
+        </div>
+      }
+    }
+  </main>
+</div>
+
+@if (mobileFiltersOpen()) {
+  <div class="mobile-filters-backdrop" (click)="mobileFiltersOpen.set(false)">
+    <div class="mobile-filters-sheet" (click)="$event.stopPropagation()">
+      <div class="sheet-header">
+        <h3>Filters</h3>
+        <button (click)="mobileFiltersOpen.set(false)" aria-label="Close">✕</button>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Type</label>
+        <div class="chip-group">
+          @for (option of tipoOptions; track option.value) {
+            <button type="button" class="chip" [class.chip-active]="filters.tipo === option.value" (click)="filters.tipo = option.value">{{ option.label }}</button>
+          }
+        </div>
+      </div>
+      <div class="filter-group">
+        <select [(ngModel)]="filters.finalidade" class="filter-select">
+          <option value="">Buy or Rent</option>
+          <option value="venda">Buy</option>
+          <option value="aluguel">Rent</option>
+        </select>
+      </div>
+      <button type="button" class="btn-primary btn-apply" (click)="applyFilters()">Apply filters</button>
+    </div>
+  </div>
+}

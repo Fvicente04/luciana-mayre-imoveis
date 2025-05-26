@@ -1,0 +1,184 @@
+@if (loading()) {
+  <div class="loading-state container">Loading...</div>
+} @else if (!imovel()) {
+  <div class="error-state container">
+    <h2>Property not found.</h2>
+    <a routerLink="/imoveis" class="btn-outline">Back to listings</a>
+  </div>
+} @else {
+  <div class="detalhe-layout container">
+
+    <div class="gallery">
+      <div class="gallery-main" (click)="openLightbox(activePhotoIndex())">
+        @if (imovel()!.fotos.length > 0) {
+          <img
+            [src]="imovel()!.fotos[activePhotoIndex()]"
+            [alt]="imovel()!.titulo"
+            loading="lazy"
+          />
+        } @else {
+          <div class="gallery-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+        }
+        @if (imovel()!.fotos.length > 1) {
+          <span class="photo-count">{{ activePhotoIndex() + 1 }} / {{ imovel()!.fotos.length }}</span>
+        }
+      </div>
+
+      @if (imovel()!.fotos.length > 1) {
+        <div class="gallery-thumbs">
+          @for (foto of imovel()!.fotos; track $index) {
+            <img
+              [src]="foto"
+              [alt]="imovel()!.titulo + ' ' + ($index + 1)"
+              loading="lazy"
+              [class.thumb-active]="activePhotoIndex() === $index"
+              (click)="activePhotoIndex.set($index)"
+            />
+          }
+        </div>
+      }
+    </div>
+
+    <div class="content-panel">
+      <div class="property-content">
+        <div class="content-header">
+          <span class="badge" [class.badge-aluguel]="imovel()!.finalidade === 'aluguel'">
+            {{ imovel()!.finalidade === 'venda' ? 'For sale' : 'For rent' }}
+          </span>
+        </div>
+
+        <p class="price">{{ imovel()!.preco | currency:'BRL':'symbol':'1.0-0' }}</p>
+        <h1>{{ imovel()!.titulo }}</h1>
+        <p class="location">{{ imovel()!.bairro }}, {{ imovel()!.cidade }} — {{ imovel()!.estado }}</p>
+
+        <div class="property-tags">
+          <span class="ptag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22v-7m0-4V2m18 20v-7m0-4V2M3 11h18M3 15h18"/></svg>
+            {{ imovel()!.quartos }} bedrooms
+          </span>
+          <span class="ptag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 A3 3 0 0 1 15 6 L15 17 A1 1 0 0 1 13 17 L13 11 A1 1 0 0 0 11 11 L11 17 A1 1 0 0 1 9 17 Z"/><path d="M4 17h16"/><path d="M4 21h16"/></svg>
+            {{ imovel()!.banheiros }} bathrooms
+          </span>
+          <span class="ptag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            {{ imovel()!.area }} m²
+          </span>
+          @if (imovel()!.vagas > 0) {
+            <span class="ptag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              {{ imovel()!.vagas }} parking
+            </span>
+          }
+          @if (imovel()!.andar) {
+            <span class="ptag">Floor {{ imovel()!.andar }}</span>
+          }
+        </div>
+
+        @if (imovel()!.condominio || imovel()!.iptu) {
+          <div class="costs-row">
+            @if (imovel()!.condominio) {
+              <span>Condo: {{ imovel()!.condominio | currency:'BRL':'symbol':'1.0-0' }}/mo</span>
+            }
+            @if (imovel()!.iptu) {
+              <span>IPTU: {{ imovel()!.iptu | currency:'BRL':'symbol':'1.0-0' }}/yr</span>
+            }
+          </div>
+        }
+
+        <section class="content-section">
+          <h2>About this property</h2>
+          <p class="descricao">{{ imovel()!.descricao }}</p>
+        </section>
+
+        <section class="content-section">
+          <h2>Property details</h2>
+          <div class="specs-grid">
+            <div class="spec-item"><span class="spec-label">Type</span><span>{{ imovel()!.tipo | titlecase }}</span></div>
+            <div class="spec-item"><span class="spec-label">Purpose</span><span>{{ imovel()!.finalidade === 'venda' ? 'For sale' : 'For rent' }}</span></div>
+            <div class="spec-item"><span class="spec-label">Area</span><span>{{ imovel()!.area }} m²</span></div>
+            <div class="spec-item"><span class="spec-label">Bedrooms</span><span>{{ imovel()!.quartos }}</span></div>
+            <div class="spec-item"><span class="spec-label">Bathrooms</span><span>{{ imovel()!.banheiros }}</span></div>
+            <div class="spec-item"><span class="spec-label">Suites</span><span>{{ imovel()!.suites }}</span></div>
+            <div class="spec-item"><span class="spec-label">Parking</span><span>{{ imovel()!.vagas }}</span></div>
+            @if (imovel()!.andar) {
+              <div class="spec-item"><span class="spec-label">Floor</span><span>{{ imovel()!.andar }}</span></div>
+            }
+            <div class="spec-item"><span class="spec-label">Neighborhood</span><span>{{ imovel()!.bairro }}</span></div>
+            <div class="spec-item"><span class="spec-label">City</span><span>{{ imovel()!.cidade }}</span></div>
+          </div>
+        </section>
+
+        <section class="content-section">
+          <h2>Location</h2>
+          <div class="map-placeholder">
+            <p class="map-label">{{ imovel()!.bairro }}, {{ imovel()!.cidade }}</p>
+          </div>
+        </section>
+
+        @if (similares().length > 0) {
+          <section class="content-section">
+            <h2>Similar properties</h2>
+            <div class="similares-grid">
+              @for (s of similares(); track s.id) {
+                <app-property-card [imovel]="s" />
+              }
+            </div>
+          </section>
+        }
+      </div>
+
+      <aside class="contact-panel">
+        <div class="agent-info">
+          <div class="agent-avatar">LM</div>
+          <div>
+            <p class="agent-name">Luciana Mayre</p>
+            <p class="agent-creci">CRECI-RJ 086.305</p>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        @if (leadSubmitted()) {
+          <div class="lead-success">
+            <p>Message sent! I'll be in touch soon.</p>
+          </div>
+        } @else {
+          <p class="contact-hint"><em>I'm interested in this property and would like more information.</em></p>
+
+          <form [formGroup]="contactForm" (ngSubmit)="submitLead()" class="contact-form">
+            <input type="text" formControlName="nomeContato" placeholder="Your name" />
+            <input type="tel" formControlName="telefone" placeholder="WhatsApp / Phone" />
+            <textarea formControlName="mensagem" rows="3"></textarea>
+            <button type="submit" class="btn-send" [disabled]="contactForm.invalid || leadSubmitting()">
+              {{ leadSubmitting() ? 'Sending...' : 'Send message' }}
+            </button>
+          </form>
+        }
+
+        <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp-full">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </aside>
+    </div>
+
+  </div>
+
+  @if (lightboxOpen()) {
+    <div class="lightbox" (click)="lightboxOpen.set(false)">
+      <button class="lb-close" (click)="lightboxOpen.set(false)">✕</button>
+      <button class="lb-nav lb-prev" (click)="$event.stopPropagation(); prevPhoto()">‹</button>
+      <img
+        [src]="imovel()!.fotos[activePhotoIndex()]"
+        [alt]="imovel()!.titulo"
+        (click)="$event.stopPropagation()"
+      />
+      <button class="lb-nav lb-next" (click)="$event.stopPropagation(); nextPhoto()">›</button>
+    </div>
+  }
+}

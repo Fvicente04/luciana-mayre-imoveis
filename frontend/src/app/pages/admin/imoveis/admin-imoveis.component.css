@@ -1,0 +1,103 @@
+@import '../dashboard/admin-dashboard.component.css';
+
+.loading-msg, .empty-msg {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  padding: 2rem 0;
+}
+
+.empty-msg a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.imoveis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.imoveis-table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.imoveis-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.row-inactive td {
+  opacity: 0.5;
+}
+
+.thumb {
+  width: 56px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.thumb-placeholder {
+  width: 56px;
+  height: 42px;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+}
+
+.td-title {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toggle-btn {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+  padding: 2px 4px;
+}
+
+.toggle-btn.active {
+  color: var(--color-primary);
+}
+
+.td-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-action {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-input);
+  color: var(--color-text-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+
+.btn-action:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-delete:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}

@@ -1,0 +1,164 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <span class="admin-logo">LM Admin</span>
+    <nav>
+      <a routerLink="/admin/dashboard">Dashboard</a>
+      <a routerLink="/admin/imoveis" routerLinkActive="active">Properties</a>
+    </nav>
+    <button class="btn-logout" (click)="logout()">Sign out</button>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1>{{ isEditing() ? 'Edit property' : 'New property' }}</h1>
+      <a routerLink="/admin/imoveis" class="btn-outline">← Back</a>
+    </div>
+
+    @if (error()) {
+      <p class="error-msg">{{ error() }}</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="imovel-form">
+      <section class="form-section">
+        <h2>Basic info</h2>
+        <div class="field-grid">
+          <div class="field field-full">
+            <label>Title *</label>
+            <input type="text" formControlName="titulo" placeholder="e.g. 2-bedroom apartment in Ipanema" />
+          </div>
+          <div class="field">
+            <label>Type *</label>
+            <select formControlName="tipo">
+              <option value="apartamento">Apartment</option>
+              <option value="casa">House</option>
+              <option value="studio">Studio</option>
+              <option value="comercial">Commercial</option>
+              <option value="terreno">Land</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Purpose *</label>
+            <select formControlName="finalidade">
+              <option value="venda">For sale</option>
+              <option value="aluguel">For rent</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Price (BRL) *</label>
+            <input type="number" formControlName="preco" placeholder="0" />
+          </div>
+          <div class="field">
+            <label>Condo fee (BRL/mo)</label>
+            <input type="number" formControlName="condominio" placeholder="0" />
+          </div>
+          <div class="field">
+            <label>IPTU (BRL/yr)</label>
+            <input type="number" formControlName="iptu" placeholder="0" />
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Details</h2>
+        <div class="field-grid">
+          <div class="field">
+            <label>Total area (m²) *</label>
+            <input type="number" formControlName="area" placeholder="0" />
+          </div>
+          <div class="field">
+            <label>Bedrooms *</label>
+            <input type="number" formControlName="quartos" min="0" />
+          </div>
+          <div class="field">
+            <label>Bathrooms *</label>
+            <input type="number" formControlName="banheiros" min="0" />
+          </div>
+          <div class="field">
+            <label>Suites</label>
+            <input type="number" formControlName="suites" min="0" />
+          </div>
+          <div class="field">
+            <label>Parking spots</label>
+            <input type="number" formControlName="vagas" min="0" />
+          </div>
+          <div class="field">
+            <label>Floor</label>
+            <input type="number" formControlName="andar" min="1" />
+          </div>
+        </div>
+        <div class="field field-full" style="margin-top: 1rem">
+          <label>Description *</label>
+          <textarea formControlName="descricao" rows="5" placeholder="Describe the property..."></textarea>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Location</h2>
+        <div class="field-grid">
+          <div class="field field-full">
+            <label>Street address *</label>
+            <input type="text" formControlName="endereco" placeholder="Rua das Flores, 100" />
+          </div>
+          <div class="field">
+            <label>Neighborhood *</label>
+            <input type="text" formControlName="bairro" placeholder="Ipanema" />
+          </div>
+          <div class="field">
+            <label>City *</label>
+            <input type="text" formControlName="cidade" />
+          </div>
+          <div class="field">
+            <label>State *</label>
+            <input type="text" formControlName="estado" maxlength="2" />
+          </div>
+          <div class="field">
+            <label>ZIP code</label>
+            <input type="text" formControlName="cep" placeholder="22000-000" />
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Settings</h2>
+        <div class="checkbox-row">
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="destaque" />
+            Featured on home page
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="ativo" />
+            Active (visible on site)
+          </label>
+        </div>
+      </section>
+
+      @if (isEditing() && currentImovel()) {
+        <section class="form-section">
+          <h2>Photos</h2>
+          <div class="photos-grid">
+            @for (foto of currentImovel()!.fotos; track foto) {
+              <div class="photo-item">
+                <img [src]="foto" [alt]="'Photo'" loading="lazy" />
+                <button type="button" class="photo-remove" (click)="removePhoto(foto)">✕</button>
+                @if (foto === currentImovel()!.fotoPrincipal) {
+                  <span class="photo-main-badge">Main</span>
+                }
+              </div>
+            }
+          </div>
+          <label class="upload-btn">
+            {{ uploadingPhotos() ? 'Uploading...' : '+ Add photos' }}
+            <input type="file" multiple accept="image/*" (change)="onPhotosSelected($event)" [disabled]="uploadingPhotos()" />
+          </label>
+        </section>
+      }
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="form.invalid || saving()">
+          {{ saving() ? 'Saving...' : (isEditing() ? 'Save changes' : 'Create property') }}
+        </button>
+        <a routerLink="/admin/imoveis" class="btn-outline">Cancel</a>
+      </div>
+    </form>
+  </main>
+</div>

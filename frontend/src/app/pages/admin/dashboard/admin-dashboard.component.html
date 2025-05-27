@@ -1,0 +1,66 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <span class="admin-logo">LM Admin</span>
+    <nav>
+      <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/admin/imoveis" routerLinkActive="active">Properties</a>
+    </nav>
+    <button class="btn-logout" (click)="logout()">Sign out</button>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1>Dashboard</h1>
+      <a routerLink="/admin/imoveis/novo" class="btn-primary">+ Add property</a>
+    </div>
+
+    @if (stats()) {
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value">{{ stats()!.totalAtivos }}</span>
+          <span class="stat-label">Active properties</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">{{ stats()!.emDestaque }}</span>
+          <span class="stat-label">Featured</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">{{ stats()!.leadsEsteMes }}</span>
+          <span class="stat-label">Leads this month</span>
+        </div>
+      </div>
+    }
+
+    <section class="leads-section">
+      <h2>Recent leads</h2>
+      @if (recentLeads().length === 0) {
+        <p class="empty-msg">No leads yet.</p>
+      } @else {
+        <div class="leads-table-wrap">
+          <table class="leads-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Property</th>
+                <th>Channel</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (lead of recentLeads(); track lead.id) {
+                <tr>
+                  <td>{{ lead.nomeContato }}</td>
+                  <td>{{ lead.telefone }}</td>
+                  <td>{{ lead.imovelTitulo ?? '—' }}</td>
+                  <td><span class="canal-badge" [class.canal-wa]="lead.canal === 'whatsapp'">{{ lead.canal }}</span></td>
+                  <td>{{ lead.createdAt | date:'dd/MM/yy HH:mm' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  </main>
+</div>

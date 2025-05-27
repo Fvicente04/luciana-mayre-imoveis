@@ -1,0 +1,70 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <span class="admin-logo">LM Admin</span>
+    <nav>
+      <a routerLink="/admin/dashboard">Dashboard</a>
+      <a routerLink="/admin/imoveis" routerLinkActive="active">Properties</a>
+    </nav>
+    <button class="btn-logout" (click)="logout()">Sign out</button>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1>Properties</h1>
+      <a routerLink="/admin/imoveis/novo" class="btn-primary">+ Add property</a>
+    </div>
+
+    @if (loading()) {
+      <p class="loading-msg">Loading...</p>
+    } @else if (imoveis().length === 0) {
+      <p class="empty-msg">No properties yet. <a routerLink="/admin/imoveis/novo">Add the first one.</a></p>
+    } @else {
+      <div class="table-wrap">
+        <table class="imoveis-table">
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Price</th>
+              <th>Featured</th>
+              <th>Active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (imovel of imoveis(); track imovel.id) {
+              <tr [class.row-inactive]="!imovel.ativo">
+                <td>
+                  @if (imovel.fotoPrincipal) {
+                    <img [src]="imovel.fotoPrincipal" [alt]="imovel.titulo" class="thumb" loading="lazy" />
+                  } @else {
+                    <div class="thumb-placeholder"></div>
+                  }
+                </td>
+                <td class="td-title">{{ imovel.titulo }}</td>
+                <td>{{ imovel.tipo }}</td>
+                <td>{{ imovel.preco | currency:'BRL':'symbol':'1.0-0' }}</td>
+                <td>
+                  <button class="toggle-btn" (click)="toggleDestaque(imovel)" [class.active]="imovel.destaque">
+                    {{ imovel.destaque ? '★' : '☆' }}
+                  </button>
+                </td>
+                <td>
+                  <button class="toggle-btn" (click)="toggleAtivo(imovel)" [class.active]="imovel.ativo">
+                    {{ imovel.ativo ? 'Yes' : 'No' }}
+                  </button>
+                </td>
+                <td class="td-actions">
+                  <a [routerLink]="['/admin/imoveis', imovel.id]" class="btn-action">Edit</a>
+                  <a [routerLink]="['/imoveis', imovel.id, imovel.slug]" target="_blank" class="btn-action">View</a>
+                  <button class="btn-action btn-delete" (click)="delete(imovel)">Delete</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </main>
+</div>

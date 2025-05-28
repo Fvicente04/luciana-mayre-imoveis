@@ -32,6 +32,6 @@ export class ImovelService {
   }
 
   getFeatured(): Observable<ImovelListResponse> {
-    return this.list({ destaque: true as unknown as undefined, limit: 3 });
+    return this.list({ destaque: true, limit: 3 });
   }
 }

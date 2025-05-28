@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
       content: 'Encontre o imóvel ideal no Rio de Janeiro com atendimento personalizado. Apartamentos, casas e imóveis comerciais para compra e aluguel. CRECI-RJ 086.305.'
     });
 
-    this.imovelService.list({ destaque: true as unknown as undefined, limit: 3 }).subscribe({
+    this.imovelService.list({ destaque: true, limit: 3 }).subscribe({
       next: ({ imoveis }) => {
         this.featuredProperties.set(imoveis);
         this.loadingFeatured.set(false);

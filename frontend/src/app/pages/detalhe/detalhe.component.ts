@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, Title, Meta } from '@angular/platform-browser';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ImovelService } from '../../core/services/imovel.service';
@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-detalhe',
-  imports: [CurrencyPipe, ReactiveFormsModule, RouterLink, PropertyCardComponent],
+  imports: [CurrencyPipe, TitleCasePipe, ReactiveFormsModule, RouterLink, PropertyCardComponent],
   templateUrl: './detalhe.component.html',
   styleUrl: './detalhe.component.css'
 })

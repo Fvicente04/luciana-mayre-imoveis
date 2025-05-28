@@ -1,11 +1,11 @@
 import { Component, Input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { Imovel } from '../../../core/models/imovel.model';
 
 @Component({
   selector: 'app-property-card',
-  imports: [RouterLink, CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe, TitleCasePipe],
   templateUrl: './property-card.component.html',
   styleUrl: './property-card.component.css'
 })

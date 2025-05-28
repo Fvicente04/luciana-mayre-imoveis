@@ -1,11 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-sobre',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './sobre.component.html',
   styleUrl: './sobre.component.css'
 })

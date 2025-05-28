@@ -45,6 +45,7 @@ export interface ImovelFilters {
   precoMax?: number;
   quartos?: number;
   bairro?: string;
+  destaque?: boolean;
   q?: string;
   page?: number;
   limit?: number;

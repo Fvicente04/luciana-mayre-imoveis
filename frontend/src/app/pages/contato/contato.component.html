@@ -1,8 +1,8 @@
 <div class="contato-page container">
   <div class="contato-grid">
     <div class="contato-info">
-      <h1>Let's talk</h1>
-      <p>Have a question, want to schedule a visit, or just want to explore what's available? Reach out through any channel below.</p>
+      <h1>Vamos conversar</h1>
+      <p>Tem alguma dúvida, quer agendar uma visita ou só quer conhecer o que está disponível? Entre em contato por qualquer canal abaixo.</p>
 
       <div class="contact-items">
         <a [href]="whatsappUrl" target="_blank" rel="noopener" class="contact-item">
@@ -15,14 +15,14 @@
         <a href="mailto:luciana@lucianamayre.com.br" class="contact-item">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <div>
-            <span class="item-label">Email</span>
+            <span class="item-label">E-mail</span>
             <span class="item-value">luciana&#64;lucianamayre.com.br</span>
           </div>
         </a>
         <div class="contact-item">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <div>
-            <span class="item-label">Location</span>
+            <span class="item-label">Localização</span>
             <span class="item-value">Rio de Janeiro, RJ</span>
           </div>
         </div>
@@ -32,26 +32,26 @@
     <div class="form-card">
       @if (submitted()) {
         <div class="success-state">
-          <h3>Message received!</h3>
-          <p>I'll get back to you as soon as possible.</p>
+          <h3>Mensagem recebida!</h3>
+          <p>Entrarei em contato o mais breve possível.</p>
         </div>
       } @else {
-        <h2>Send a message</h2>
+        <h2>Enviar mensagem</h2>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="field">
-            <label for="nome">Name</label>
-            <input id="nome" type="text" formControlName="nomeContato" placeholder="Your full name" />
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" formControlName="nomeContato" placeholder="Seu nome completo" />
           </div>
           <div class="field">
-            <label for="tel">Phone / WhatsApp</label>
+            <label for="tel">Telefone / WhatsApp</label>
             <input id="tel" type="tel" formControlName="telefone" placeholder="(21) 99999-9999" />
           </div>
           <div class="field">
-            <label for="msg">Message</label>
-            <textarea id="msg" formControlName="mensagem" rows="5" placeholder="How can I help you?"></textarea>
+            <label for="msg">Mensagem</label>
+            <textarea id="msg" formControlName="mensagem" rows="5" placeholder="Como posso te ajudar?"></textarea>
           </div>
           <button type="submit" class="btn-primary btn-submit" [disabled]="form.invalid || submitting()">
-            {{ submitting() ? 'Sending...' : 'Send message' }}
+            {{ submitting() ? 'Enviando...' : 'Enviar mensagem' }}
           </button>
         </form>
       }

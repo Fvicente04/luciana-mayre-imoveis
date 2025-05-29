@@ -3,10 +3,10 @@
     <a routerLink="/" class="logo">Luciana Mayre Imóveis</a>
 
     <nav class="nav-desktop">
-      <a routerLink="/imoveis" [queryParams]="{finalidade: 'compra'}" routerLinkActive="active">Buy</a>
-      <a routerLink="/imoveis" [queryParams]="{finalidade: 'aluguel'}" routerLinkActive="active">Rent</a>
-      <a routerLink="/sobre" routerLinkActive="active">About me</a>
-      <a routerLink="/contato" routerLinkActive="active">Contact</a>
+      <a routerLink="/imoveis" [queryParams]="{finalidade: 'venda'}" routerLinkActive="active">Comprar</a>
+      <a routerLink="/imoveis" [queryParams]="{finalidade: 'aluguel'}" routerLinkActive="active">Alugar</a>
+      <a routerLink="/sobre" routerLinkActive="active">Sobre mim</a>
+      <a routerLink="/contato" routerLinkActive="active">Contato</a>
     </nav>
 
     <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp-header">
@@ -25,10 +25,10 @@
 @if (mobileMenuOpen()) {
   <div class="mobile-drawer" (click)="closeMenu()">
     <nav class="mobile-nav" (click)="$event.stopPropagation()">
-      <a routerLink="/imoveis" [queryParams]="{finalidade: 'compra'}" (click)="closeMenu()">Buy</a>
-      <a routerLink="/imoveis" [queryParams]="{finalidade: 'aluguel'}" (click)="closeMenu()">Rent</a>
-      <a routerLink="/sobre" (click)="closeMenu()">About me</a>
-      <a routerLink="/contato" (click)="closeMenu()">Contact</a>
+      <a routerLink="/imoveis" [queryParams]="{finalidade: 'venda'}" (click)="closeMenu()">Comprar</a>
+      <a routerLink="/imoveis" [queryParams]="{finalidade: 'aluguel'}" (click)="closeMenu()">Alugar</a>
+      <a routerLink="/sobre" (click)="closeMenu()">Sobre mim</a>
+      <a routerLink="/contato" (click)="closeMenu()">Contato</a>
       <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-whatsapp" (click)="closeMenu()">
         WhatsApp
       </a>

@@ -36,7 +36,7 @@ export class DetalheComponent implements OnInit {
   contactForm = this.fb.group({
     nomeContato: ['', Validators.required],
     telefone: ['', Validators.required],
-    mensagem: ['Olá! Tenho interesse neste imóvel e gostaria de mais informações.']
+    mensagem: ['Olá! Tenho interesse neste imóvel e gostaria de mais informações sobre ele.']
   });
 
   ngOnInit(): void {

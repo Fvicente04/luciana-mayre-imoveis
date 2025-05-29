@@ -15,10 +15,10 @@ export class SobreComponent implements OnInit {
   whatsappUrl = `https://wa.me/${environment.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site e gostaria de mais informações sobre imóveis.')}`;
 
   ngOnInit(): void {
-    this.title.setTitle('About me — Luciana Mayre Imóveis');
+    this.title.setTitle('Sobre mim — Luciana Mayre Imóveis');
     this.meta.updateTag({
       name: 'description',
-      content: 'Meet Luciana Mayre, real estate agent in Rio de Janeiro with over 10 years of experience. CRECI-RJ 086.305.'
+      content: 'Conheça a Luciana Mayre, corretora de imóveis no Rio de Janeiro com mais de 10 anos de experiência. CRECI-RJ 086.305.'
     });
   }
 }

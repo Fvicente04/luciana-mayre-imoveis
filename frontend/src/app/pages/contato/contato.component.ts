@@ -28,10 +28,10 @@ export class ContatoComponent implements OnInit {
   whatsappUrl = `https://wa.me/${environment.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site e gostaria de mais informações sobre imóveis.')}`;
 
   ngOnInit(): void {
-    this.title.setTitle('Contact — Luciana Mayre Imóveis');
+    this.title.setTitle('Contato — Luciana Mayre Imóveis');
     this.meta.updateTag({
       name: 'description',
-      content: 'Get in touch with Luciana Mayre, real estate agent in Rio de Janeiro. WhatsApp: (21) 96679-0079.'
+      content: 'Entre em contato com a Luciana Mayre, corretora de imóveis no Rio de Janeiro. WhatsApp: (21) 96679-0079.'
     });
   }
 

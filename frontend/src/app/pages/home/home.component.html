@@ -1,25 +1,25 @@
 <section class="hero">
   <div class="container hero-content">
-    <p class="hero-super">CRECI-RJ 086.305 · Real Estate Agent</p>
-    <h1>More than finding a property,<br>I help you find a home.</h1>
-    <p class="hero-sub">Personalized, human-centered service in Rio de Janeiro.</p>
+    <p class="hero-super">CRECI-RJ 086.305 · Corretora de Imóveis</p>
+    <h1>Mais do que encontrar um imóvel,<br>eu ajudo você a encontrar um lar.</h1>
+    <p class="hero-sub">Atendimento personalizado e humanizado no Rio de Janeiro.</p>
 
     <form class="search-bar" (ngSubmit)="onSearch()">
       <select [(ngModel)]="searchFinalidade" name="finalidade">
-        <option value="compra">Buy</option>
-        <option value="aluguel">Rent</option>
+        <option value="compra">Comprar</option>
+        <option value="aluguel">Alugar</option>
       </select>
       <input
         type="text"
         [(ngModel)]="searchTerm"
         name="q"
-        placeholder="Where do you want to live?"
+        placeholder="Onde você quer morar?"
       />
       <button type="submit" class="btn-primary search-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
-        Search
+        Buscar
       </button>
     </form>
   </div>
@@ -27,7 +27,7 @@
 
 <section class="featured-section">
   <div class="container">
-    <h2 class="section-title">Featured properties</h2>
+    <h2 class="section-title">Imóveis em destaque</h2>
 
     @if (loadingFeatured()) {
       <div class="properties-grid">
@@ -51,16 +51,16 @@
       <div class="avatar-circle">LM</div>
     </div>
     <div class="about-text">
-      <h2>Hi, I'm Luciana.</h2>
+      <h2>Olá, sou a Luciana.</h2>
       <p>
-        With over 10 years of experience in the Rio de Janeiro real estate market,
-        I specialize in connecting people with spaces that truly feel like home.
-        I work with each client one-on-one — no rush, no pressure.
+        Com mais de 10 anos de experiência no mercado imobiliário carioca,
+        ajudo pessoas a encontrar o imóvel certo com tranquilidade e sem pressa.
+        Cada cliente recebe atenção individual — sem scripts, sem pressão.
       </p>
       <div class="about-tags">
-        <span class="tag">10+ years of experience</span>
-        <span class="tag">Active CRECI</span>
-        <span class="tag">200+ deals closed</span>
+        <span class="tag">+10 anos de experiência</span>
+        <span class="tag">CRECI ativo</span>
+        <span class="tag">+200 negócios fechados</span>
       </div>
     </div>
   </div>
@@ -68,7 +68,7 @@
 
 <section class="differentials-section">
   <div class="container">
-    <h2 class="section-title">Why work with me</h2>
+    <h2 class="section-title">Por que trabalhar comigo</h2>
     <div class="differentials-grid">
       <div class="differential-item">
         <div class="diff-icon">
@@ -76,8 +76,8 @@
             <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
           </svg>
         </div>
-        <h3>Human-first service</h3>
-        <p>Every client gets my full attention. I take time to understand what matters to you before showing a single property.</p>
+        <h3>Atendimento humanizado</h3>
+        <p>Cada cliente tem minha atenção total. Entendo o que importa pra você antes de mostrar qualquer imóvel.</p>
       </div>
       <div class="differential-item">
         <div class="diff-icon">
@@ -85,8 +85,8 @@
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <h3>Safe process</h3>
-        <p>I guide you through every step of the legal and financial process, so there are no surprises after you sign.</p>
+        <h3>Processo seguro</h3>
+        <p>Acompanho cada etapa jurídica e financeira para que não haja surpresas na hora da assinatura.</p>
       </div>
       <div class="differential-item">
         <div class="diff-icon">
@@ -94,8 +94,8 @@
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
         </div>
-        <h3>Local expertise</h3>
-        <p>Born and raised in Rio, I know the neighborhoods, prices, and trends that outside agents often miss.</p>
+        <h3>Especialista local</h3>
+        <p>Carioca de coração, conheço os bairros, os preços reais e as tendências que corretores de fora não enxergam.</p>
       </div>
     </div>
   </div>
@@ -103,26 +103,26 @@
 
 <section class="testimonials-section">
   <div class="container">
-    <h2 class="section-title">What my clients say</h2>
+    <h2 class="section-title">O que dizem meus clientes</h2>
     <div class="testimonials-grid">
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <blockquote>"Luciana was incredible throughout the entire process. She found the perfect apartment for our family in less than a month. Attentive and zero pressure."</blockquote>
+        <blockquote>"A Luciana foi incrível durante todo o processo. Encontrou o apartamento perfeito para a nossa família em menos de um mês. Atendimento humano e sem pressão."</blockquote>
         <cite>Fernanda Oliveira</cite>
       </div>
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <blockquote>"An outstanding professional. She guided me through every step of the paperwork. I bought my apartment with total peace of mind."</blockquote>
+        <blockquote>"Profissional exemplar. Além de encontrar o imóvel ideal, ela me orientou em cada etapa da documentação. Recomendo sem hesitar."</blockquote>
         <cite>Ricardo Matos</cite>
       </div>
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <blockquote>"First-time buyer here. Luciana had endless patience with my questions and was always honest about every property she showed me."</blockquote>
+        <blockquote>"Comprei meu primeiro apartamento com a Luciana. Ela teve uma paciência enorme com todas as minhas dúvidas e sempre foi honesta sobre os imóveis."</blockquote>
         <cite>Ana Paula Souza</cite>
       </div>
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <blockquote>"We rented our home through Luciana. Fast, transparent, no unnecessary bureaucracy. We'll absolutely work with her again."</blockquote>
+        <blockquote>"Alugamos nossa casa por intermédio da Luciana. Processo rápido, transparente e sem burocracia desnecessária. Voltaremos a trabalhar com ela com certeza."</blockquote>
         <cite>Carlos Eduardo Lima</cite>
       </div>
     </div>

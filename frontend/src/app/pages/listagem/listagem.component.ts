@@ -41,23 +41,23 @@ export class ListagemComponent implements OnInit {
   precoMaxValue = 5000000;
 
   tipoOptions: { value: TipoImovel | ''; label: string }[] = [
-    { value: '', label: 'All types' },
-    { value: 'apartamento', label: 'Apartment' },
-    { value: 'casa', label: 'House' },
+    { value: '', label: 'Todos' },
+    { value: 'apartamento', label: 'Apartamento' },
+    { value: 'casa', label: 'Casa' },
     { value: 'studio', label: 'Studio' },
-    { value: 'comercial', label: 'Commercial' },
-    { value: 'terreno', label: 'Land' }
+    { value: 'comercial', label: 'Comercial' },
+    { value: 'terreno', label: 'Terreno' }
   ];
 
   currentPageLabel = computed(() =>
-    `Page ${this.filters.page} of ${this.totalPages()}`
+    `Página ${this.filters.page} de ${this.totalPages()}`
   );
 
   ngOnInit(): void {
-    this.title.setTitle('Properties — Luciana Mayre Imóveis');
+    this.title.setTitle('Imóveis — Luciana Mayre Imóveis');
     this.meta.updateTag({
       name: 'description',
-      content: 'Browse apartments, houses, studios and commercial spaces for sale and rent in Rio de Janeiro.'
+      content: 'Apartamentos, casas, studios e imóveis comerciais para compra e aluguel no Rio de Janeiro.'
     });
 
     this.route.queryParams.subscribe(params => {

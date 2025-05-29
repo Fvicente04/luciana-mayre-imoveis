@@ -21,7 +21,7 @@
   --radius-lg:    10px;
   --radius-pill:  30px;
 
-  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --shadow-card: 0 2px 12px rgba(61, 31, 20, 0.08);

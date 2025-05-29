@@ -16,6 +16,17 @@ body {
   color: var(--color-text-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6,
+nav, header, .btn-primary, .btn-outline, .btn-whatsapp,
+label, input, select, textarea, button {
+  text-align: initial;
+}
+
+p {
+  hyphens: auto;
 }
 
 h1, h2, h3 {

@@ -12,13 +12,11 @@
   padding-bottom: 2rem;
 }
 
-.logo {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--color-text-body);
-  display: block;
+.footer-logo-img {
+  height: 56px;
+  width: auto;
   margin-bottom: 0.5rem;
+  display: block;
 }
 
 .footer-brand p {

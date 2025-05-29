@@ -16,12 +16,14 @@
 }
 
 .logo {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.2rem;
-  color: var(--color-text-body);
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+}
+
+.logo-img {
+  height: 48px;
+  width: auto;
 }
 
 .nav-desktop {

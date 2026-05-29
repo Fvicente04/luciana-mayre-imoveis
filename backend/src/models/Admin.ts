@@ -34,6 +34,7 @@ Admin.init(
     sequelize,
     modelName: 'Admin',
     tableName: 'admins',
-    timestamps: true
+    timestamps: true,
+    underscored: true
   }
 );

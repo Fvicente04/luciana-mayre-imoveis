@@ -45,6 +45,7 @@ Lead.init(
     sequelize,
     modelName: 'Lead',
     tableName: 'leads',
-    timestamps: true
+    timestamps: true,
+    underscored: true
   }
 );

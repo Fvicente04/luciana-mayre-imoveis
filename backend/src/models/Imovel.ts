@@ -107,6 +107,7 @@ Imovel.init(
     modelName: 'Imovel',
     tableName: 'imoveis',
     paranoid: true,
-    timestamps: true
+    timestamps: true,
+    underscored: true
   }
 );

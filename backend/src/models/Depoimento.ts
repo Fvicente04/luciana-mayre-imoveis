@@ -35,6 +35,7 @@ Depoimento.init(
     sequelize,
     modelName: 'Depoimento',
     tableName: 'depoimentos',
-    timestamps: true
+    timestamps: true,
+    underscored: true
   }
 );

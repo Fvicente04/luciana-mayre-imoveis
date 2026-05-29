@@ -95,8 +95,12 @@ export class AdminImovelFormComponent implements OnInit {
       next: (result) => {
         this.currentImovel.update(i => i ? { ...i, ...result } : i);
         this.uploadingPhotos.set(false);
+        input.value = '';
       },
-      error: () => this.uploadingPhotos.set(false)
+      error: () => {
+        this.uploadingPhotos.set(false);
+        input.value = '';
+      }
     });
   }
 

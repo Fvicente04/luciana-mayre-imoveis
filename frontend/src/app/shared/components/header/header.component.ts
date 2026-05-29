@@ -1,6 +1,5 @@
 import { Component, signal, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +9,6 @@ import { environment } from '../../../../environments/environment';
 })
 export class HeaderComponent {
   mobileMenuOpen = signal(false);
-
-  whatsappUrl = `https://wa.me/${environment.whatsappNumber}?text=${encodeURIComponent('Olá! Vim pelo site e gostaria de mais informações sobre imóveis.')}`;
 
   @HostListener('document:keydown.escape')
   closeMenu(): void {

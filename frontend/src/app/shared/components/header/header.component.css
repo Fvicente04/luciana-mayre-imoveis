@@ -56,10 +56,20 @@
   border-radius: 1px;
 }
 
-.btn-whatsapp-header {
-  padding: 8px 16px;
-  font-size: 0.85rem;
+.btn-contato {
   flex-shrink: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-pill);
+  padding: 7px 18px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.btn-contato:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .hamburger {
@@ -76,7 +86,6 @@
   height: 2px;
   background: var(--color-text-body);
   border-radius: 1px;
-  transition: transform 0.2s;
 }
 
 .mobile-drawer {
@@ -104,7 +113,7 @@
 
 @media (max-width: 768px) {
   .nav-desktop,
-  .btn-whatsapp-header {
+  .btn-contato {
     display: none;
   }
 

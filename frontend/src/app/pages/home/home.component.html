@@ -1,8 +1,9 @@
 <section class="hero">
-  <div class="container hero-content">
-    <p class="hero-super">CRECI-RJ 086.305 · Corretora de Imóveis</p>
-    <h1>Mais do que encontrar um imóvel,<br>eu ajudo você a encontrar um lar.</h1>
-    <p class="hero-sub">Atendimento personalizado e humanizado no Rio de Janeiro.</p>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-super">CRECI-RJ 086.305 · Rio de Janeiro</p>
+    <h1>Seu próximo lar está no Rio.<br>Eu te levo até ele.</h1>
+    <p class="hero-sub">5 anos encontrando o imóvel certo para cada família. Atendimento individual, sem pressa e sem pressão.</p>
 
     <form class="search-bar" (ngSubmit)="onSearch()">
       <select [(ngModel)]="searchFinalidade" name="finalidade">
@@ -15,7 +16,7 @@
         name="q"
         placeholder="Onde você quer morar?"
       />
-      <button type="submit" class="btn-primary search-btn">
+      <button type="submit" class="search-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
@@ -27,42 +28,24 @@
 
 <section class="featured-section">
   <div class="container">
-    <h2 class="section-title">Imóveis em destaque</h2>
+    <div class="section-header">
+      <h2 class="section-title">Imóveis em destaque</h2>
+      <a routerLink="/imoveis" class="see-all">Ver todos →</a>
+    </div>
 
     @if (loadingFeatured()) {
-      <div class="properties-grid">
-        <app-skeleton-card />
+      <div class="featured-grid">
+        <app-skeleton-card class="featured-main" />
         <app-skeleton-card />
         <app-skeleton-card />
       </div>
     } @else if (featuredProperties().length > 0) {
-      <div class="properties-grid">
-        @for (imovel of featuredProperties(); track imovel.id) {
-          <app-property-card [imovel]="imovel" />
+      <div class="featured-grid">
+        @for (imovel of featuredProperties(); track imovel.id; let i = $index) {
+          <app-property-card [imovel]="imovel" [class.featured-main]="i === 0" />
         }
       </div>
     }
-  </div>
-</section>
-
-<section class="about-section">
-  <div class="container about-grid">
-    <div class="about-avatar">
-      <div class="avatar-circle">LM</div>
-    </div>
-    <div class="about-text">
-      <h2>Olá, sou a Luciana.</h2>
-      <p>
-        Com mais de 10 anos de experiência no mercado imobiliário carioca,
-        ajudo pessoas a encontrar o imóvel certo com tranquilidade e sem pressa.
-        Cada cliente recebe atenção individual — sem scripts, sem pressão.
-      </p>
-      <div class="about-tags">
-        <span class="tag">+10 anos de experiência</span>
-        <span class="tag">CRECI ativo</span>
-        <span class="tag">+200 negócios fechados</span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -104,27 +87,34 @@
 <section class="testimonials-section">
   <div class="container">
     <h2 class="section-title">O que dizem meus clientes</h2>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"A Luciana foi incrível durante todo o processo. Encontrou o apartamento perfeito para a nossa família em menos de um mês. Atendimento humano e sem pressão."</blockquote>
-        <cite>Fernanda Oliveira</cite>
+
+    <div class="carousel">
+      <button class="carousel-btn carousel-prev" (click)="prev()" aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="carousel-track">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>"{{ depoimentoAtual().texto }}"</blockquote>
+          <cite>{{ depoimentoAtual().nome }}</cite>
+        </div>
       </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Profissional exemplar. Além de encontrar o imóvel ideal, ela me orientou em cada etapa da documentação. Recomendo sem hesitar."</blockquote>
-        <cite>Ricardo Matos</cite>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Comprei meu primeiro apartamento com a Luciana. Ela teve uma paciência enorme com todas as minhas dúvidas e sempre foi honesta sobre os imóveis."</blockquote>
-        <cite>Ana Paula Souza</cite>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Alugamos nossa casa por intermédio da Luciana. Processo rápido, transparente e sem burocracia desnecessária. Voltaremos a trabalhar com ela com certeza."</blockquote>
-        <cite>Carlos Eduardo Lima</cite>
-      </div>
+
+      <button class="carousel-btn carousel-next" (click)="next()" aria-label="Próximo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div class="carousel-dots">
+      @for (d of depoimentos; track $index) {
+        <button
+          class="dot"
+          [class.dot-active]="activeDepoimento() === $index"
+          (click)="goTo($index)"
+          [attr.aria-label]="'Depoimento ' + ($index + 1)"
+        ></button>
+      }
     </div>
   </div>
 </section>

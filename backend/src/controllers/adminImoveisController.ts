@@ -53,26 +53,31 @@ export async function removerImovel(req: Request, res: Response): Promise<void> 
 }
 
 export async function adicionarFotos(req: Request, res: Response): Promise<void> {
-  const imovel = await Imovel.findByPk(req.params.id);
-  if (!imovel) {
-    res.status(404).json({ error: 'Imóvel não encontrado' });
-    return;
+  try {
+    const imovel = await Imovel.findByPk(req.params.id);
+    if (!imovel) {
+      res.status(404).json({ error: 'Imóvel não encontrado' });
+      return;
+    }
+
+    const arquivos = req.files as Express.Multer.File[];
+    if (!arquivos?.length) {
+      res.status(422).json({ error: 'Nenhuma foto enviada' });
+      return;
+    }
+
+    const novasUrls = await Promise.all(
+      arquivos.map(f => uploadParaCloudinary(f.buffer, 'luciana-mayre-imoveis'))
+    );
+    const fotosAtualizadas = [...imovel.fotos, ...novasUrls];
+    const fotoPrincipal = imovel.fotoPrincipal || novasUrls[0];
+
+    await imovel.update({ fotos: fotosAtualizadas, fotoPrincipal });
+    res.json({ fotos: fotosAtualizadas, fotoPrincipal });
+  } catch (err) {
+    console.error('Erro ao fazer upload de fotos:', err);
+    res.status(500).json({ error: 'Falha no upload. Verifica as credenciais do Cloudinary.' });
   }
-
-  const arquivos = req.files as Express.Multer.File[];
-  if (!arquivos?.length) {
-    res.status(422).json({ error: 'Nenhuma foto enviada' });
-    return;
-  }
-
-  const novasUrls = await Promise.all(
-    arquivos.map(f => uploadParaCloudinary(f.buffer, 'luciana-mayre-imoveis'))
-  );
-  const fotosAtualizadas = [...imovel.fotos, ...novasUrls];
-  const fotoPrincipal = imovel.fotoPrincipal || novasUrls[0];
-
-  await imovel.update({ fotos: fotosAtualizadas, fotoPrincipal });
-  res.json({ fotos: fotosAtualizadas, fotoPrincipal });
 }
 
 export async function removerFotoImovel(req: Request, res: Response): Promise<void> {

@@ -1,42 +1,71 @@
-<div class="sobre-hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="avatar-wrap">
-        <div class="avatar-circle">LM</div>
-      </div>
-      <div class="hero-text">
-        <p class="super">CRECI-RJ 086.305</p>
-        <h1>Olá, sou a Luciana Mayre.</h1>
-        <p>Corretora de imóveis apaixonada por conectar pessoas a lares que fazem sentido para as suas vidas.</p>
-        <a routerLink="/contato" class="btn-primary">Entre em contato</a>
-      </div>
+<section class="sobre-hero">
+  <div class="hero-foto">
+    <img src="/luciana.jpg" alt="Luciana Mayre" class="hero-foto-img" #fotoEl (error)="fotoEl.style.display='none'" />
+    <div class="hero-foto-fallback">LM</div>
+  </div>
+  <div class="hero-conteudo">
+    <p class="super">CRECI-RJ 086.305</p>
+    <h1>Olá, sou a Luciana Mayre.</h1>
+    <p>Corretora de imóveis apaixonada por conectar pessoas a lares que fazem sentido para as suas vidas.</p>
+    <a routerLink="/contato" class="btn-primary">Entre em contato</a>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat-item">
+    <span class="stat-num">10+</span>
+    <span class="stat-lbl">Anos de experiência</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">200+</span>
+    <span class="stat-lbl">Negócios fechados</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">RJ</span>
+    <span class="stat-lbl">Especialista local</span>
+  </div>
+</div>
+
+<div class="historia">
+  <aside class="historia-sidebar">
+    <h2>Minha história</h2>
+    <div class="historia-divider"></div>
+    <span class="historia-local">Rio de Janeiro</span>
+  </aside>
+  <div class="historia-corpo">
+    <p>Atuo no mercado imobiliário carioca há mais de 5 anos. O que começou como uma carreira se tornou uma verdadeira vocação — não tem nada parecido com entregar a chave de um lugar que alguém vai chamar de lar.</p>
+    <p>Trabalho de forma independente, o que significa que cada cliente tem minha atenção integral — da primeira conversa ao fechamento. Sem repasses, sem assistentes, sem roteiro pronto. Só um atendimento honesto e personalizado.</p>
+    <p>Sou especialista em imóveis residenciais no Rio de Janeiro — apartamentos, casas, studios — tanto para compra quanto para aluguel. Se você está comprando seu primeiro imóvel ou buscando um bom investimento, estou aqui para te guiar em cada etapa.</p>
+  </div>
+</div>
+
+<div class="valores-section">
+  <h2 class="valores-titulo">Como eu trabalho</h2>
+  <div class="valores-grid">
+    <div class="valor-card">
+      <div class="valor-icon">🤝</div>
+      <h4>Atenção integral</h4>
+      <p>Cada cliente tem meu acompanhamento do início ao fechamento, sem intermediários.</p>
+    </div>
+    <div class="valor-card">
+      <div class="valor-icon">📍</div>
+      <h4>Especialista local</h4>
+      <p>Conheço o Rio de Janeiro de perto — bairros, preços reais e oportunidades escondidas.</p>
+    </div>
+    <div class="valor-card">
+      <div class="valor-icon">💬</div>
+      <h4>Comunicação clara</h4>
+      <p>Sem jargão técnico. Explico cada etapa para que você decida com confiança.</p>
     </div>
   </div>
 </div>
 
-<div class="container sobre-content">
-  <div class="story-section">
-    <h2>Minha história</h2>
-    <p>
-      Atuo no mercado imobiliário carioca há mais de 5 anos. O que começou como uma carreira
-      se tornou uma verdadeira vocação — não tem nada parecido com entregar a chave de um lugar
-      que alguém vai chamar de lar.
-    </p>
-    <p>
-      Trabalho de forma independente, o que significa que cada cliente tem minha atenção integral —
-      da primeira conversa ao fechamento. Sem repasses, sem assistentes, sem roteiro pronto.
-      Só um atendimento honesto e personalizado.
-    </p>
-    <p>
-      Sou especialista em imóveis residenciais no Rio de Janeiro — apartamentos, casas, studios —
-      tanto para compra quanto para aluguel. Se você está comprando seu primeiro imóvel ou buscando
-      um bom investimento, estou aqui para te guiar em cada etapa.
-    </p>
+<div class="cta-final">
+  <div class="cta-texto">
+    <p class="cta-titulo">Pronta para te ajudar a encontrar seu lar.</p>
+    <p class="cta-sub">Me chame no WhatsApp — respondo rapidinho.</p>
   </div>
-
-  <div class="stats-row">
-    <div class="stat"><span class="stat-number">10+</span><span class="stat-label">Anos de experiência</span></div>
-    <div class="stat"><span class="stat-number">200+</span><span class="stat-label">Negócios fechados</span></div>
-    <div class="stat"><span class="stat-number">RJ</span><span class="stat-label">Especialista local</span></div>
-  </div>
+  <a href="https://wa.me/5521966790079?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações." target="_blank" rel="noopener" class="btn-whatsapp-cta">
+    Fale comigo no WhatsApp
+  </a>
 </div>

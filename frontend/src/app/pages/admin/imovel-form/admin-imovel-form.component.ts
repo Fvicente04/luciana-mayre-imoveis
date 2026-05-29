@@ -72,9 +72,15 @@ export class AdminImovelFormComponent implements OnInit {
       : this.adminService.create(data);
 
     request$.subscribe({
-      next: () => this.router.navigate(['/admin/imoveis']),
+      next: (saved) => {
+        if (this.isEditing()) {
+          this.router.navigate(['/admin/imoveis']);
+        } else {
+          this.router.navigate(['/admin/imoveis', (saved as Imovel).id]);
+        }
+      },
       error: () => {
-        this.error.set('Failed to save. Please try again.');
+        this.error.set('Falha ao salvar. Tente novamente.');
         this.saving.set(false);
       }
     });

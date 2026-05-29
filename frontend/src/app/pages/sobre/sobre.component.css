@@ -2,8 +2,9 @@
 .sobre-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 480px;
+  min-height: 560px;
   border-bottom: 1px solid var(--color-border);
+  align-items: stretch;
 }
 
 .hero-foto {
@@ -21,6 +22,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 15%;
 }
 
 .hero-foto-fallback {
@@ -50,11 +52,23 @@
   margin-bottom: 1rem;
 }
 
-.hero-conteudo > p {
+.hero-sub {
   color: var(--color-text-muted);
   line-height: 1.65;
-  margin-bottom: 1.75rem;
+  margin-bottom: 0;
   max-width: 420px;
+}
+
+.hero-conteudo p:not(.hero-sub):not(.super) {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--color-text-body);
+  margin-bottom: 1rem;
+}
+
+.hero-conteudo .btn-primary {
+  margin-top: 0.75rem;
+  align-self: flex-start;
 }
 
 /* Stats strip */
@@ -91,43 +105,11 @@
   color: var(--color-text-muted);
 }
 
-/* História */
-.historia {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 48px;
-  padding: 64px 60px;
-}
-
-.historia-sidebar h2 {
-  font-size: 1.375rem;
-  margin-bottom: 0;
-}
-
 .historia-divider {
   width: 32px;
   height: 2px;
   background: var(--color-primary);
-  margin: 16px 0;
-}
-
-.historia-local {
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--color-text-muted);
-}
-
-.historia-corpo p {
-  font-size: 0.9375rem;
-  line-height: 1.8;
-  color: var(--color-text-body);
-  margin-bottom: 1.25rem;
-  text-align: left;
-}
-
-.historia-corpo p:last-child {
-  margin-bottom: 0;
+  margin: 20px 0;
 }
 
 /* Valores */
@@ -250,12 +232,6 @@
 
   .stat-item:last-child {
     border-bottom: none;
-  }
-
-  .historia {
-    grid-template-columns: 1fr;
-    padding: 2.5rem 1.5rem;
-    gap: 2rem;
   }
 
   .valores-section {
